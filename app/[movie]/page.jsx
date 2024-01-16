@@ -11,7 +11,7 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function MovieDetail({ params }) {
+export default async function MovieDetail({ params }) {
   const { movie } = params;
   const imagePath = "https://image.tmdb.org/t/p/original";
   const data = await fetch(
@@ -20,7 +20,7 @@ export async function MovieDetail({ params }) {
   const res = await data.json();
   console.log(res);
   return (
-    <div>
+    <div className="max-w-4xl m-auto">
       <div>
         <h2 className="text-2xl">{res.title}</h2>
         <h2 className="text-lg">{res.release_date}</h2>

@@ -2,12 +2,11 @@ import Image from "next/image";
 
 export async function generateStaticParams() {
   const data = await fetch(
-    `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.API_KEY}`,
-    
+    `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.API_KEY}`
   );
   const res = await data.json();
   return res.results.map((movie) => ({
-    movie: toString(movie.id),
+    params: { movie: String(movie.id) },
   }));
 }
 
@@ -18,7 +17,6 @@ export default async function MovieDetail({ params }) {
     `https://api.themoviedb.org/3/movie/${movie}?api_key=${process.env.API_KEY}`
   );
   const res = await data.json();
-  console.log(res);
   return (
     <div className="max-w-4xl m-auto">
       <div>
@@ -41,8 +39,6 @@ export default async function MovieDetail({ params }) {
     </div>
   );
 }
-
-
 
 // const data = await fetch(`https://api.themoviedb.org/3/movie/${movie}?api_key=${process.env.API_KEY}`, {next: {revalidate: 60}});
 // to render the data we fetch from server, can add {next: {revalidate: 60}} which refresh the data every 60 seconds (we choose the time)

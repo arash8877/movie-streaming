@@ -1,7 +1,7 @@
 module.exports = {
-    images: {
-      domains: ['image.tmdb.org'],
-    },
-    // other configurations...
-  }
-  
+  images: {
+    domains: ["image.tmdb.org"],
+  },
+};
+
+

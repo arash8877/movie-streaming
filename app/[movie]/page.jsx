@@ -1,13 +1,26 @@
 import Image from "next/image";
 
 export async function generateStaticParams() {
-  const data = await fetch(
-    `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.API_KEY}`
-  );
-  const res = await data.json();
-  return res.results.map((movie) => ({
-    params: { movie: String(movie.id) },
-  }));
+  try {
+    const data = await fetch(
+      'https://api.themoviedb.org/3/movie/popular?api_key=dce76334c2564193f3f9aad8edb50238'
+    );
+    const res = await data.json();
+
+    if (!res.results) {
+      throw new Error('No results in API response');
+    }
+
+    return {
+      paths: res.results.map((movie) => ({
+        params: { movie: String(movie.id) },
+      })),
+      fallback: false,
+    };
+  } catch (error) {
+    console.error(error);
+    return { paths: [], fallback: false };
+  }
 }
 
 export default async function MovieDetail({ params }) {

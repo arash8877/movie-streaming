@@ -3,7 +3,3 @@ module.exports = {
     domains: ["image.tmdb.org"],
   },
 };
-
-module.exports = {
-  distDir: "build",
-};

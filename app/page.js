@@ -5,11 +5,10 @@ export default async function Home() {
     `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.API_KEY}`
   );
   const res = await data.json();
-  console.log(res)
   return (
     <main>
       <main>
-        <div className="grid gap-15 grid-cols-fluid">
+        <div className="grid gap-16 grid-cols-fluid">
           {res.results.map((movie) => (
             <Movie
               key={movie.id}
